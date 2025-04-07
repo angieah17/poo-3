@@ -63,4 +63,9 @@ public class Counter {
 		return false;
 	}
 	
+	
+	public int getValue() {
+		return value;
+	}
+	
 }

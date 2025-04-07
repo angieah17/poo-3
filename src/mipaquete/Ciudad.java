@@ -21,6 +21,10 @@ public class Ciudad {
 	public List<Counter> getContadores() {
 		return contadores;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
 	
 	
 	

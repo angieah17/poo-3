@@ -143,7 +143,8 @@ public class Persona implements Comparable<Persona> {
 		
 		personas
 		.stream()
-		.sorted((p1, p2) -> p1.colorDeOjo.toString().compareTo(p2.colorDeOjo.toString()) )
+		.sorted((p1, p2) -> p1.colorDeOjo.toString().compareTo(p2.colorDeOjo.toString()) ) //al convertirlo se pone el orden de los String, sino
+		//el orden natural será tal cual como uno los haya metido p1.colorDeOjo.compareTo 
 		.forEach(System.out::println);
 		
 		

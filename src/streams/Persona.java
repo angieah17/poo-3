@@ -3,8 +3,12 @@ package streams;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+
 
 public class Persona implements Comparable<Persona> {
 
@@ -15,6 +19,14 @@ public class Persona implements Comparable<Persona> {
 	private double alturaEnCm;
 	private ColorDeOjo colorDeOjo;
 	private Continente continente;
+
+	
+	
+	
+	
+	public int getEdad() {
+		return edad;
+	}
 
 	enum ColorDeOjo {
 
@@ -238,7 +250,51 @@ public class Persona implements Comparable<Persona> {
 				.findAny());
 		
 		
-		//collect
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.anyMatch(a -> a.length() > 8));
+		
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.noneMatch(a -> a.length() > 8));
+		
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.filter(a -> a.length() > 8) 
+				.toList());
+		
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.filter(a -> a.length() > 8) 
+				.toArray(String[]::new)); //Se recomienda usardo con referencia de constructor, si después se quiere usar como Stering []
+		//y se pone vacío se tendrá que hacer un casting
+		
+		//collect con Collector (el más común)
+		
+		
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.filter(a -> a.length() > 8) 
+				.collect(Collectors.toList()));
+		
+		
+		//collect con Suplier - mucho más específico
+		
+		System.out.println(personas.stream()
+				.map(p -> p.apellido1)
+				.filter(a -> a.length() > 8) 
+				.collect(ArrayList::new, List::add, List::addAll));
+		
+		
+		
+		//Métodos de IntStream y otros primitivos
+		
+		System.out.println(personas.stream()
+			    .collect(Collectors.summarizingInt(Persona::getEdad)));
+
+		
+		//Es necesario implementar el getter incluso estnado dentro de la misma clase porque las lambdas acceden como si estuviesen
+		// desde fuera
 		
 		
 	}

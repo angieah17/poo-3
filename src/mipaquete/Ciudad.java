@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Ciudad {
 	
-	private List<Counter> contadores;
+	private List <Counter> contadores;
 	private String nombre;
 	
 	

@@ -24,6 +24,10 @@ public class Persona implements Comparable<Persona> {
 	
 	
 	
+	public String getNombre() {
+		return nombre;
+	}
+
 	public int getEdad() {
 		return edad;
 	}
@@ -145,6 +149,14 @@ public class Persona implements Comparable<Persona> {
 		System.out.println("---- ORDEN NO NATURAL: POR EDAD INVERSA. CON COMPARATOR ----\n");
 
 		personas.stream().sorted((p1, p2) -> p2.edad - p1.edad).forEach(System.out::println);
+		
+		System.out.println("---- ORDEN NO NATURAL: POR EDAD Y ADEMÁS POR NOMBRE CON COMPARATOR ----\n");
+		
+		personas.stream()
+	    .sorted(
+	        Comparator.comparingInt(Persona::getEdad)
+	                  .thenComparing(p -> p.nombre)  //Usa lambda (p -> p.nombre) si no tienes un getter o si estás accediendo directamente a un campo público.
+	    );
 
 		// 4. Ordenar por otro tipo se usa un Comparator
 
@@ -155,6 +167,8 @@ public class Persona implements Comparable<Persona> {
 
 		// Puedo definir Comparator por ciertos items para usarlos dentro del sorte
 		// cuando uno lo necesite
+		
+		
 
 		personas.stream().sorted(comparatorPorEstatura).forEach(System.out::println);
 
@@ -240,7 +254,10 @@ public class Persona implements Comparable<Persona> {
 		System.out.println(personas.stream()
 		.map(p -> p.apellido1)
 		.filter(a -> a.length() > 5) 
-		.findFirst());
+		.findFirst().get());
+		
+		//el .get() es un método del Optional que sale de findFirst para que no salga Optional[Fernández]
+		
 		
 		//findany
 		
